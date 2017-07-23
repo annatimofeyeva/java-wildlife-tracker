@@ -8,25 +8,25 @@ public class EndangeredAnimal extends Animal {
   public static final String type = "endangered";
 
   public EndangeredAnimal(String name, String health, String age) {
-    // Name is set in the Constructor of super class
-    super(name);
-    this.health = health;
-    this.age = age;
-  }
-
-  public EndangeredAnimal(String name, int id, String health, String age) {
-    // Name is set in the Constructor of super class
-    super(name, id);
-    this.health = health;
-    this.age = age;
+    this.setHealth(health);
+    this.setAge(age);
+    this.setName(name);
   }
 
   public String getHealth() {
     return health;
   }
 
+  public void setHealth(String health) {
+    this.health = health;
+  }
+
   public String getAge() {
     return age;
+  }
+
+  public void setAge(String age) {
+    this.age = age;
   }
 
   @Override

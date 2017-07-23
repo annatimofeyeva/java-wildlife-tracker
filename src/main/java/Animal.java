@@ -6,28 +6,25 @@ public abstract class Animal {
   private String name;
   private int id;
 
-  public Animal(String name) {
+  public String getName() {
+    return name;
+  }
+
+  public void setName(String name) {
     if (name == null || name.length() == 0) {
       throw(new IllegalArgumentException("No valid animal name provided."));
     }
     this.name = name;
-  }
-
-  public Animal(String name, int id){
-    this(name);
-    this.id = id;
-  }
-
-  public String getName() {
-    return name;
+    System.out.println("setName name: " + name + " id: " + id);
   }
 
   public int getId() {
     return id;
   }
 
-  public void setId(int id){
+  public void setId(int id) {
     this.id = id;
+    System.out.println("setId name: " + name + " id: " + id);
   }
 
   public abstract boolean equals(Object o);
@@ -62,5 +59,4 @@ public abstract class Animal {
       return sightings;
     }
   }
-
 }

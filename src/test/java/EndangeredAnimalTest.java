@@ -53,7 +53,6 @@ public class EndangeredAnimalTest {
     EndangeredAnimal testEndangeredAnimal = new EndangeredAnimal("Fox", "Healthy", "Young");
     testEndangeredAnimal.save();
     testEndangeredAnimal.updateHealth("ill");
-    EndangeredAnimal updated = EndangeredAnimal.find(testEndangeredAnimal.getId());
     assertEquals("ill", EndangeredAnimal.find(testEndangeredAnimal.getId()).getHealth());
   }
 

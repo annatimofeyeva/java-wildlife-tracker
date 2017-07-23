@@ -5,12 +5,8 @@ import java.util.List;
 public class NonEndangeredAnimal extends Animal {
   public static final String type = "nonendangered";
 
-  public NonEndangeredAnimal(String name, int id) {
-    super(name, id);
-  }
-
   public NonEndangeredAnimal(String name) {
-    super(name);
+    this.setName(name);
   }
 
   public void save() {
