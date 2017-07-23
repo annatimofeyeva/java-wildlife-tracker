@@ -27,9 +27,9 @@ public abstract class Animal {
     this.id = id;
   }
 
-  //public abstract boolean equals(Object o);
+  public abstract boolean equals(Object o);
 
-  //public abstract void save();
+  public abstract void save();
 
   public void updateName(String name) {
     try(Connection con = DB.sql2o.open()) {
