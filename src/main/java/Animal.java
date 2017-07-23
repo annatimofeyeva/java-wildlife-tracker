@@ -7,6 +7,9 @@ public abstract class Animal {
   private int id;
 
   public Animal(String name) {
+    if (name == null || name.length() == 0) {
+      throw(new IllegalArgumentException("No valid animal name provided."));
+    }
     this.name = name;
   }
 
