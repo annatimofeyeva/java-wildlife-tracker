@@ -61,28 +61,24 @@ public class App {
     post("/animal/new", (request, response) -> {
       Map<String, Object> model = new HashMap<String, Object>();
       boolean endangered = request.queryParamsValues("endangered")!=null;
-      try {
-        if (endangered) {
-          String name = request.queryParams("name");
-          String health = request.queryParams("health");
-          String age = request.queryParams("age");
-          EndangeredAnimal endangeredAnimal = new EndangeredAnimal(name, health, age);
-          endangeredAnimal.save();
-          model.put("animals", NonEndangeredAnimal.all());
-          model.put("endangeredAnimals", EndangeredAnimal.all());
-        } else {
-          String name = request.queryParams("name");
-          NonEndangeredAnimal animal = new NonEndangeredAnimal(name);
-          animal.save();
-          model.put("animals", NonEndangeredAnimal.all());
-          model.put("endangeredAnimals", EndangeredAnimal.all());
-        }
-      } catch (IllegalArgumentException iae) {
-        System.out.println(iae.getMessage());
+      if (endangered) {
+        String name = request.queryParams("name");
+        String health = request.queryParams("health");
+        String age = request.queryParams("age");
+        EndangeredAnimal endangeredAnimal = new EndangeredAnimal(name, health, age);
+        endangeredAnimal.save();
+        model.put("animals", NonEndangeredAnimal.all());
+        model.put("endangeredAnimals", EndangeredAnimal.all());
+      } else {
+        String name = request.queryParams("name");
+        NonEndangeredAnimal animal = new NonEndangeredAnimal(name);
+        animal.save();
+        model.put("animals", NonEndangeredAnimal.all());
+        model.put("endangeredAnimals", EndangeredAnimal.all());
       }
       response.redirect("/");
-        return null;
-      });
+      return null;
+    });
 
     get("/animal/:id", (request, response) -> {
       Map<String, Object> model = new HashMap<String, Object>();
@@ -105,5 +101,12 @@ public class App {
       model.put("template", "templates/error.vtl");
       return new ModelAndView(model, layout);
     }, new VelocityTemplateEngine());
+
+    exception(IllegalArgumentException.class, (e, request, response) -> {
+      response.status(500);
+      response.body("Following error occured:<br>" +
+        e.getMessage() +
+        "<br>Please use back browser button, fix the problem and try again.");
+    });
   }
 }
