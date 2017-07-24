@@ -10,6 +10,12 @@ public class Sighting {
   private int id;
 
   public Sighting(int animal_id, String location, String ranger_name) {
+    if (location == null || location.length() == 0) {
+      throw(new IllegalArgumentException("Invalid location provided."));
+    }
+    if (ranger_name == null || ranger_name.length() == 0) {
+      throw(new IllegalArgumentException("Invalid ranger name provided."));
+    }
     this.animal_id = animal_id;
     this.location = location;
     this.ranger_name = ranger_name;

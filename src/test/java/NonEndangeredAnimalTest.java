@@ -75,4 +75,12 @@ public class NonEndangeredAnimalTest {
     assertTrue(NonEndangeredAnimal.find(999) == null);
   }
 
+  @Test
+  public void constructor_ThrowsExceptionIfEmptyName() {
+    try {
+      NonEndangeredAnimal testNonEndangeredAnimal = new NonEndangeredAnimal("");
+      fail("Expected exception was not thrown");
+    } catch (IllegalArgumentException iae) {
+    }
+  }
 }

@@ -70,4 +70,25 @@ public class SightingTest {
     assertTrue(NonEndangeredAnimal.find(999) == null);
   }
 
+  @Test
+  public void constructor_throwsExceptionIfBadLocation() {
+    try {
+      NonEndangeredAnimal testNonEndangeredAnimal = new NonEndangeredAnimal("Deer");
+      testNonEndangeredAnimal.save();
+      Sighting testSighting = new Sighting (testNonEndangeredAnimal.getId(), "", "Ranger Avery");
+      fail("Expected exception not thrown");
+    } catch(IllegalArgumentException iae) {
+    }
+  }
+
+  @Test
+  public void constructor_throwsExceptionIfBadRangerName() {
+    try {
+      NonEndangeredAnimal testNonEndangeredAnimal = new NonEndangeredAnimal("Deer");
+      testNonEndangeredAnimal.save();
+      Sighting testSighting = new Sighting (testNonEndangeredAnimal.getId(), "somewhere", "");
+      fail("Expected exception not thrown");
+    } catch(IllegalArgumentException iae) {
+    }
+  }
 }

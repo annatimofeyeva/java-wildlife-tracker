@@ -64,4 +64,12 @@ public class EndangeredAnimalTest {
     assertEquals("Adult", EndangeredAnimal.find(testEndangeredAnimal.getId()).getAge());
   }
 
+  @Test
+  public void constructor_ThrowsExceptionIfEmptyName() {
+    try {
+      EndangeredAnimal testEndangeredAnimal = new EndangeredAnimal("", "Healthy", "Young");
+      fail("Expected exception was not thrown");
+    } catch (IllegalArgumentException iae) {      
+    }
+  }
 }
