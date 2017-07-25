@@ -15,14 +15,14 @@ SET client_min_messages = warning;
 SET row_security = off;
 
 --
--- Name: plpgsql; Type: EXTENSION; Schema: -; Owner:
+-- Name: plpgsql; Type: EXTENSION; Schema: -; Owner: 
 --
 
 CREATE EXTENSION IF NOT EXISTS plpgsql WITH SCHEMA pg_catalog;
 
 
 --
--- Name: EXTENSION plpgsql; Type: COMMENT; Schema: -; Owner:
+-- Name: EXTENSION plpgsql; Type: COMMENT; Schema: -; Owner: 
 --
 
 COMMENT ON EXTENSION plpgsql IS 'PL/pgSQL procedural language';
@@ -78,7 +78,8 @@ CREATE TABLE sightings (
     id integer NOT NULL,
     animal_id integer,
     location character varying,
-    ranger_name character varying
+    ranger_name character varying,
+    sight_time timestamp without time zone
 );
 
 
@@ -131,14 +132,14 @@ COPY animals (id, name, type, health, age) FROM stdin;
 -- Name: animals_id_seq; Type: SEQUENCE SET; Schema: public; Owner: anya
 --
 
-SELECT pg_catalog.setval('animals_id_seq', 9, true);
+SELECT pg_catalog.setval('animals_id_seq', 15, true);
 
 
 --
 -- Data for Name: sightings; Type: TABLE DATA; Schema: public; Owner: anya
 --
 
-COPY sightings (id, animal_id, location, ranger_name) FROM stdin;
+COPY sightings (id, animal_id, location, ranger_name, sight_time) FROM stdin;
 \.
 
 
@@ -146,7 +147,7 @@ COPY sightings (id, animal_id, location, ranger_name) FROM stdin;
 -- Name: sightings_id_seq; Type: SEQUENCE SET; Schema: public; Owner: anya
 --
 
-SELECT pg_catalog.setval('sightings_id_seq', 5, true);
+SELECT pg_catalog.setval('sightings_id_seq', 7, true);
 
 
 --
@@ -168,3 +169,4 @@ ALTER TABLE ONLY sightings
 --
 -- PostgreSQL database dump complete
 --
+
