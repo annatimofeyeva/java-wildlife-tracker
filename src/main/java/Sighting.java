@@ -2,12 +2,15 @@ import org.sql2o.*;
 import java.util.List;
 import java.util.ArrayList;
 import java.util.Arrays;
+import java.sql.Timestamp;
+import java.text.DateFormat;
 
 public class Sighting {
   private int animal_id;
   private String location;
   private String ranger_name;
   private int id;
+  private Timestamp sight_time;
 
   public Sighting(int animal_id, String location, String ranger_name) {
     if (location == null || location.length() == 0) {
@@ -38,6 +41,10 @@ public class Sighting {
     return ranger_name;
   }
 
+  public String getSightTime() {
+    return DateFormat.getDateTimeInstance().format(sight_time);
+  }
+
   @Override
   public boolean equals(Object otherSighting) {
     if(!(otherSighting instanceof Sighting)) {
@@ -50,7 +57,7 @@ public class Sighting {
 
   public void save() {
     try(Connection con = DB.sql2o.open()) {
-      String sql = "INSERT INTO sightings (animal_id, location, ranger_name) VALUES (:animal_id, :location, :ranger_name);";
+      String sql = "INSERT INTO sightings (animal_id, location, ranger_name, sight_time) VALUES (:animal_id, :location, :ranger_name, now());";
       this.id = (int) con.createQuery(sql, true)
         .addParameter("animal_id", this.animal_id)
         .addParameter("location", this.location)
@@ -81,5 +88,4 @@ public class Sighting {
       return null;
     }
   }
-
 }
